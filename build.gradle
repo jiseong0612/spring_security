@@ -38,8 +38,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-<프로젝트 환경 설정>
-openJDK_11, spring-boot(2.7.9), mariaDB, mybatis(3.0.0), thymeleaf, security
-<목적>
-시큐리티 공부

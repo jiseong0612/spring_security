@@ -2,12 +2,15 @@ package com.pmg.security1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pmg.security1.config.PrincipalDetails;
 import com.pmg.security1.domain.User;
 import com.pmg.security1.service.UserService;
 
@@ -21,7 +24,9 @@ public class IndexController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@GetMapping("/")
-	public String index() {
+	public String index(Authentication auth, Model mdoel) {
+		PrincipalDetails  user = (PrincipalDetails)auth.getPrincipal();
+		mdoel.addAttribute("userId", user.getUsername());
 		return "index";
 	}
 	
@@ -58,13 +63,16 @@ public class IndexController {
 
 	@PostMapping("/join")
 	public String join(User user) {
-		user.setRole("ROLE_USER");
+		String type = user.getRole();
+		type = "u".equals(type)? "ROLE_USER" : "m".equals(type)? "ROLE_MANAGER" : "ROLE_ADMIN";
+		
+		user.setRole(type);
 		
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
 		user.setPassword(encPassword);
 		
-		service.save(user);	//회원가입
+		service.save(user);
 		return "redirect:/loginForm";
 	}
 }
