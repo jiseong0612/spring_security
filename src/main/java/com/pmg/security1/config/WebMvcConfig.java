@@ -16,6 +16,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		
 		registry.addInterceptor(globalIntercepter)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/static/**", "/public/**", "/resources/**", "/favicon.ico");
+		.excludePathPatterns("/static/**", "/public/**", "/resources/**", "/favicon.ico", "/logout");
 	}
 }

@@ -10,5 +10,5 @@ public interface BoardMapper {
 
 	public List<Map<String, String>> getBoardList();
 
-	public int boardInsert(Map<String, String> boardMap);
+	public int boardInsert(Map<String, Object> boardMap);
 }

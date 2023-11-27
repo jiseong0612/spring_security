@@ -51,19 +51,19 @@ public class IndexController {
 
 	@GetMapping("/user")
 	public @ResponseBody String user() {
-		return "user";
+		return "user <br> <a href='/board'>방명록 작성하기</a>";
 	}
 
 	@GetMapping("/manager")
 	public @ResponseBody String manager() {
-		return "manager";
+		return "manager <br> <a href='/board'>방명록 작성하기</a>";
 	}
 
 	@GetMapping("/admin")
 	public @ResponseBody String admin() {
-		return "admin";
+		return "admin <br> <a href='/board'>방명록 작성하기</a>";
 	}
-
+	
 	@PostMapping("/join")
 	public String join(User user) {
 		String type = user.getRole();

@@ -4,10 +4,12 @@
 
     <select id="getBoardList" resultType="map">
     /* 유저 회원 가입 */
-	SELECT * FROM BOARD
+	SELECT a.title, a.writer, a.bno, b.role FROM BOARD a
+	inner join user b on a.id = b.id
+	order by bno asc
     </select>
     
     <insert id="boardInsert">
-    INSERT INTO BOARD (title, writer) values(#{title}, #{writer})
+    INSERT INTO BOARD (id, title, writer) values(#{id}, #{title}, #{writer})
     </insert>
 </mapper>
