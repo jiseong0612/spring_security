@@ -20,4 +20,8 @@ public class BoardService {
 	public int boardInsert(Map<String, Object>boardMap) {
 		return mapper.boardInsert(boardMap);
 	}
+	
+	public int deleBoard(int bno) {
+		return mapper.deleBoard(bno);
+	}
 }

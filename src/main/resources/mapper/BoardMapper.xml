@@ -12,4 +12,8 @@
     <insert id="boardInsert">
     INSERT INTO BOARD (id, title, writer) values(#{id}, #{title}, #{writer})
     </insert>
+    
+    <delete id="deleBoard">
+    DELETE FROM BOARD WHERE bno = #{bno}
+    </delete>
 </mapper>
