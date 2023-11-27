@@ -9,6 +9,4 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BoardMapper {
 
 	public List<Map<String, String>> getBoardList();
-
-	public int boardInsert(Map<String, String> boardMap);
 }

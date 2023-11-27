@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pmg.security1.mapper.UserMapper">
+	
+    <insert id="save">
+    /* 유저 회원 가입 */
+	INSERT INTO USER
+		(USERNAME, PASSWORD, EMAIL, ROLE)
+	VALUES
+		(#{username}, #{password}, #{email}, #{role})
+    </insert>
+    
+    <select id="findByUsername" resultType="map">
+    	SELECT * FROM USER WHERE USERNAME = #{username}
+    </select>
+</mapper>

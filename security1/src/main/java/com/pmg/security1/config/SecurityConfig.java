@@ -13,22 +13,25 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.pmg.security1.service.UserService;
+
+import lombok.Setter;
+
 @Configuration
 @EnableWebSecurity	//스프링 시큐리티 필터가 스프링 필터체인에 등록됩니다.
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)	//secured 어노테이션 활성화
 public class SecurityConfig {
-	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		return http
-//			.csrf().disable()
-			.rememberMe()
+			.rememberMe().key("key")			//token 생성용 필수 키 값
 			.rememberMeParameter("rememberMe")	//파라미터 명
 			.tokenValiditySeconds(3600*24*365) 	//토큰 유지기간 1년
 			.tokenRepository(persistentTokenRepository())
 			.and()
 			.authorizeRequests()
 			.antMatchers("/user/**").authenticated()	//모든 권한 허용
+//			.antMatchers("/user/**").access("hasRole('ROLE_USER')")
 			.antMatchers("/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()
@@ -36,13 +39,13 @@ public class SecurityConfig {
 			.formLogin()					//--로그인--
 			.loginPage("/loginForm")		//로그인 URL
 			.loginProcessingUrl("/login")	//login 주소가 호출되면 시큐리티가 낚아채서 대신 로그인 진행
-			.successHandler(new CustomLoginSuccessHandler())	//로그인 성공시 
+			.successHandler(new CustomLoginSuccessHandler())
+//			.defaultSuccessUrl("/")			//로그인 성공시 이동할 페이지(메인)
 			.and()
 			.logout()						//--로그아웃--
 			.logoutUrl("/logout")			//로그아웃 URL
 			.invalidateHttpSession(true)	//세션 무효화
 			.deleteCookies("JSESSIONID")	//쿠키 삭제
-			.logoutSuccessUrl("/")			//로그아웃 성공시 이동할 페이지(메인)
 			.and().build();
 	}
 	
@@ -52,7 +55,7 @@ public class SecurityConfig {
 	}
 	
 	@Autowired
-	private DataSource dataSource;
+	private DataSource dataSource;	
 	
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {

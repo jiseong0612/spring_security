@@ -16,8 +16,4 @@ public class BoardService {
 	public List<Map<String, String>> getBoardList(){
 		return mapper.getBoardList();
 	}
-	
-	public int boardInsert(Map<String, String>boardMap) {
-		return mapper.boardInsert(boardMap);
-	}
 }

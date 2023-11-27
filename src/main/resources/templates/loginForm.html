@@ -13,6 +13,31 @@
 	<input type="checkbox" name="rememberMe">자동로그인<br>
 	<button>로그인</button>
 </form>
+<button id="ajaxBtn">비동기 로그인하기</button>
 <a href="/joinForm">회원가입 하기!!</a>
 </body>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function(){
+	$('#ajaxBtn').on('click', function(){
+		var data = {
+				username : $('[name=username]').val(),
+				password : $('[name=password]').val(),
+				rememberMe : $('[name=rememberMe]').val()
+		};
+		$.ajax({
+			url:'/login',
+			type : 'post',
+			data : data,
+			success : function(aaa, bbb, ccc, ddd, eee){
+					location.href=aaa;
+			},
+			error : function(){
+				alert('ee');
+			}
+		});
+	});
+});
+</script>
 </html>

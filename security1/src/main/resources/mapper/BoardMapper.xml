@@ -6,8 +6,4 @@
     /* 유저 회원 가입 */
 	SELECT * FROM BOARD
     </select>
-    
-    <insert id="boardInsert">
-    INSERT INTO BOARD (title, writer) values(#{title}, #{writer})
-    </insert>
 </mapper>

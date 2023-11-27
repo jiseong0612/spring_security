@@ -9,5 +9,43 @@
 <ul>
 	<li th:each="board : ${boardList}" th:text="|${board.bno}번 >>> 작성자 : ${board.writer}, 제목 : ${board.title}|"></li>
 </ul>
+<hr>
+
+<h1>board insert</h1>
+<div>
+	<form action="/insert" method="post">
+		<h3>방명록을 작성해 보세요</h3>
+		<input type="text" name="title" placeholder="title"><br>
+		<input type="text" name="writer" placeholder="writer"><br>
+		<input type="hidden" th:name = "${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<button>작성하기</button>
+	</form>
+</div>
+<br>
+<br>
+<br>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+$(function(){
+	$('#ajaxBtn').on('click', function(){
+		var data = {
+				title : $('[name=title]').val(),
+				writer : $('[name=writer]').val(),
+		};
+		$.ajax({
+			url:'/login',
+			type : 'post',
+			data : data,
+			success : function(){
+				
+			},
+			error : function(){
+				alert('ee');
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>

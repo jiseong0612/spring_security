@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>board List</h1>
+<ul>
+	<li th:each="board : ${boardList}" th:text="|${board.bno}번 >>> 작성자 : ${board.writer}, 제목 : ${board.title}|"></li>
+</ul>
+</body>
+</html>
