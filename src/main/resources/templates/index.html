@@ -9,6 +9,12 @@
 <h2 th:text="${userId}"></h2>
 <h2>[[${userId}]]</h2>
 
-<a href="/logout">logout!!</a>
+
+<div th:if="${userId} != null and ${userId} != ''">
+	<a href="/logout">logout!!</a>
+</div>
+<div th:unless="${userId} != null and ${userId} != ''">
+	<a href="/loginForm">login!!</a>
+</div>
 </body>
 </html>

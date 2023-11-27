@@ -13,14 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import com.pmg.security1.service.UserService;
-
-import lombok.Setter;
-
 @Configuration
 @EnableWebSecurity	//스프링 시큐리티 필터가 스프링 필터체인에 등록됩니다.
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)	//secured 어노테이션 활성화
 public class SecurityConfig {
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		return http
@@ -40,12 +37,14 @@ public class SecurityConfig {
 			.formLogin()					//--로그인--
 			.loginPage("/loginForm")		//로그인 URL
 			.loginProcessingUrl("/login")	//login 주소가 호출되면 시큐리티가 낚아채서 대신 로그인 진행
-			.defaultSuccessUrl("/")			//로그인 성공시 이동할 페이지(메인)
+			.successHandler(new CustomLoginSuccessHandler())
+//			.defaultSuccessUrl("/")			//로그인 성공시 이동할 페이지(메인)
 			.and()
 			.logout()						//--로그아웃--
 			.logoutUrl("/logout")			//로그아웃 URL
 			.invalidateHttpSession(true)	//세션 무효화
 			.deleteCookies("JSESSIONID")	//쿠키 삭제
+			.logoutSuccessUrl("/")			//로그아웃 성공시 이동할 페이지(메인)
 			.and().build();
 	}
 	

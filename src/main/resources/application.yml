@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:mariadb://127.0.0.1:3306/security
-    username: pmguser
-    password: pmgk1234
+    username: root
+    password: 1234
     driver-class-name: org.mariadb.jdbc.Driver
   
 # Mapper Xml Location

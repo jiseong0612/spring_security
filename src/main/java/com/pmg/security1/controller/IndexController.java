@@ -25,8 +25,11 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String index(Authentication auth, Model mdoel) {
-		PrincipalDetails  user = (PrincipalDetails)auth.getPrincipal();
-		mdoel.addAttribute("userId", user.getUsername());
+		if(auth != null) {
+			PrincipalDetails  user = (PrincipalDetails)auth.getPrincipal();
+			mdoel.addAttribute("userId", user.getUsername());
+		}
+		
 		return "index";
 	}
 	
