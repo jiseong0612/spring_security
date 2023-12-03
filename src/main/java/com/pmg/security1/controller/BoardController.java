@@ -22,33 +22,42 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 
-	@GetMapping("/board")
+	@GetMapping("/list")
 	public String main(Model model) {
 		List<Map<String, String>> boardList = service.getBoardList();
 
 		model.addAttribute("boardList", boardList);
+		return "board/list";
+	}
+	
+	@GetMapping("/board")
+	public String board(@RequestParam Map<String, String>inMap, Model model) {
+		
+		int bno = Integer.parseInt(inMap.get("bno"));
+		
+		Map<String, String> board = service.getBoard(bno);
+		
+		model.addAttribute("board", board);
 		return "board/board";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/insert")
-	public String insert(@RequestParam Map<String, Object>boardMap, Authentication auth) {
+	public String insert(@RequestParam Map<String, Object>inMap, Authentication auth) {
 		PrincipalDetails user = (PrincipalDetails)auth.getPrincipal();
-		boardMap.put("id", user.getId());
+		inMap.put("id", user.getId());
 		
-		int result = service.boardInsert(boardMap);
+		int result = service.boardInsert(inMap);
 		
 		return "redirect:/board";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/del")
-	public ResponseEntity<Integer> insert(@RequestParam Map<String, String>boardMap) {
+	public ResponseEntity<Integer> insert(@RequestParam Map<String, String>inMap) {
 		
-		int result = service.deleBoard(Integer.parseInt(boardMap.get("bno")));
+		int result = service.deleBoard(Integer.parseInt(inMap.get("bno")));
 		
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
-	
-	
 }

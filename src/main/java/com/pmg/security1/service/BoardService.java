@@ -24,4 +24,8 @@ public class BoardService {
 	public int deleBoard(int bno) {
 		return mapper.deleBoard(bno);
 	}
+
+	public Map<String, String> getBoard(int bno) {
+		return mapper.getBoard(bno);
+	}
 }

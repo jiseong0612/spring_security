@@ -13,4 +13,6 @@ public interface BoardMapper {
 	public int boardInsert(Map<String, Object> boardMap);
 
 	public int deleBoard(int bno);
+
+	public Map<String, String> getBoard(int bno);
 }
