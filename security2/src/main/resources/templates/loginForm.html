@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>login page</h1>
+<hr>
+<form action="/login" method="post">
+	<input type="text" name="username" placeholder="username"><br>
+	<input type="password" name="password" placeholder="password"><br>
+	<input type="checkbox" name="rememberMe" id="remember"><label for="remember">remember-me</label><br>
+	<button>login</button>
+</form>
+<a href="/oauth2/authorization/google">구글 로그인</a>
+<button id="ajaxBtn">sign in</button>
+<a href="/joinForm">create account!!</a>
+</body>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+/* 
+$(function(){
+	$('#ajaxBtn').on('click', function(){
+		var data = {
+			username : $('[name=username]').val(),
+			password : $('[name=password]').val(),
+			rememberMe : $('[name=rememberMe]').val()
+		};
+		
+		$.ajax({
+			url:'/login',
+			type : 'post',
+			contentType: "application/json",
+			data : JSON.stringify(data),
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrf, csrfToken);
+			},
+			success : function(aaa, bbb, ccc, ddd, eee){
+					location.href=aaa;
+			},
+			error : function(){
+				alert('ee');
+			}
+		});
+	});
+}); */
+</script>
+</html>

@@ -1,0 +1,32 @@
+server:
+  port: 8088
+ 
+spring:
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/security2
+    username: root
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1005397163457-sl8u27tss79lupkgrf7ndgosclbso91r.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
+# Mapper Xml Location
+mybatis:
+  mapper-locations:
+  - classpath:mapper/**/*.xml
+  

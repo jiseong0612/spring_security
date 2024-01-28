@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>index page</h1>
+<h2 th:text="${userId}"></h2>
+<h2>[[${userId}]]</h2>
+
+
+<div th:if="${userId} != null and ${userId} != ''">
+	<a href="/logout">logout!!</a>
+</div>
+<div th:unless="${userId} != null and ${userId} != ''">
+	<a href="/loginForm">login!!</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>sign up page</h1>
+<hr>
+<form action="/join" method="post">
+	<input type="text" name="username" placeholder="username"><br>
+	<input type="password" name="password" placeholder="password"><br>
+	<input type="text" name="email" placeholder="email"><br><br>
+	
+	<input type="radio" id="user" name="role" value="u">
+	<label for="user">user</label>
+	<input type="radio" id="manager" name="role" value="m">
+	<label for="manager">manager</label>
+	<input type="radio" id="admin" name="role" value="a">
+	<label for="admin">admin</label><br><br>
+	<button>sign up</button> 
+</form>
+</body>
+</html>
