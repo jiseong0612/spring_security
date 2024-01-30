@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-import hello.security2.oauth.PrincipalOauth2UserService;
+import hello.security2.config.oauth.PrincipalOauth2UserService;
 
 @Configuration
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록됨
