@@ -7,10 +7,22 @@ spring:
     username: root
     password: 1234
     driver-class-name: org.mariadb.jdbc.Driver
+ 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 472502831784-qkutpf5amth755fpbkarr105aio6a816.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
     
 logging:
   level:
     '[com.example]': debug
+
     
 mybatis:
   mapper-locations:

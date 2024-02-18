@@ -4,9 +4,9 @@
     <insert id="memberSave">
     /* 유저 회원 가입 */
 	INSERT INTO USER
-		(USERNAME, PASSWORD, EMAIL, ROLE, CREATEDATE)
+		(USERNAME, PASSWORD, EMAIL, ROLE, PROVIDER, PROVIDERID, CREATEDATE)
 	VALUES
-		(#{username}, #{password}, #{email}, #{role}, now())
+		(#{username}, #{password}, #{email}, #{role}, #{provider}, #{providerId} , now())
     </insert>
     
     <insert id="adminSave">
