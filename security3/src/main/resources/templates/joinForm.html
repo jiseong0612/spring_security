@@ -6,18 +6,25 @@
 <body>
 <h1>회원가입 page</h1>
 <hr>
-<form action="/register" method="post">
+<form action="/join" method="post">
 	<input type="text" name="username" placeholder="username"><br>
 	<input type="password" name="password" placeholder="password"><br>
 	<input type="text" name="email" placeholder="email"><br><br>
 	
-	<input type="radio" id="user" name="role" value="USER">
+	<input type="radio" id="user" name="role" value="u">
 	<label for="user">user</label>
-	<input type="radio" id="manager" name="role" value="MANAGER">
+	<input type="radio" id="manager" name="role" value="m">
 	<label for="manager">manager</label>
-	<input type="radio" id="admin" name="role" value="ADMIN">
+	<input type="radio" id="admin" name="role" value="a">
 	<label for="admin">admin</label><br><br>
+	<div>
+		<input type="radio" id="memberType" name="userType" value="memberType">
+		<label for="memberType">일반회원</label>
+		<input type="radio" id="adminType" name="userType" value="adminType">
+		<label for="adminType">관리자</label><br><br>
+	</div>
 	<button>회원가입</button> 
 </form>
+<a href="/loginForm">login page</a>
 </body>
 </html>
