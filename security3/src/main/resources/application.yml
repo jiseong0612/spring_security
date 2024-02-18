@@ -10,7 +10,7 @@ spring:
     
 logging:
   level:
-    '[com.example]': debug
+    '[com]': debug
     
 mybatis:
   mapper-locations:
