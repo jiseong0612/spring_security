@@ -40,6 +40,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 		User user = service.findbyusername(username);
 		
 		if(user == null) {
+			System.out.println("구글 로그인 최초!");
 			user = user.builder()
 					.username(username)
 					.password(password)
@@ -50,6 +51,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 					.build();
 			
 			service.memberSave(user);
+		}else {
+			System.out.println("구글 로그인을 이미 한적이 있습니다. 당신은 자동 회원가입이 되어 있습니다.");
 		}
 		
 		return new PrincipalUserDetails(user, oauth2User.getAttributes());
