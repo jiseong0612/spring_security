@@ -1,12 +1,7 @@
 package com.example.demo.web.controller;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +12,10 @@ import com.example.demo.config.auth.PrincipalUserDetails;
 import com.example.demo.web.domain.User;
 import com.example.demo.web.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class IndexController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -28,6 +26,7 @@ public class IndexController {
 	@GetMapping("/info")
 	@ResponseBody
 	public String  info() {
+		log.debug("errorrodjflkasfjdasklfdjsklfsajklfdsal");
 		return "개인정보";
 	}
 
