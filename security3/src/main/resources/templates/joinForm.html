@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>회원가입 page</h1>
+<hr>
+<form action="/register" method="post">
+	<input type="text" name="username" placeholder="username"><br>
+	<input type="password" name="password" placeholder="password"><br>
+	<input type="text" name="email" placeholder="email"><br><br>
+	
+	<input type="radio" id="user" name="role" value="USER">
+	<label for="user">user</label>
+	<input type="radio" id="manager" name="role" value="MANAGER">
+	<label for="manager">manager</label>
+	<input type="radio" id="admin" name="role" value="ADMIN">
+	<label for="admin">admin</label><br><br>
+	<button>회원가입</button> 
+</form>
+</body>
+</html>
