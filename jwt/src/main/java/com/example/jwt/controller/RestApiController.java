@@ -14,6 +14,12 @@ public class RestApiController {
 		return "<h1>home</h1>";
 	}
 	
+	@PostMapping("/token")
+	public String token() {
+		System.out.println("api token");
+		return "<h1>token</h1>";
+	}
+	
 	@PostMapping("/login")
 	public String login() {
 		System.out.println("api login");
