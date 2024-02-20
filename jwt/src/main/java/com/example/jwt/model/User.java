@@ -19,6 +19,7 @@ public class User {
 	private String username;
 	private String password;
 	private String roles;	//
+	private String email;
 	
 	
 	public List<String> getRoleList(){

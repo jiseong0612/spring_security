@@ -3,39 +3,62 @@ package com.example.jwt.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
+import com.example.jwt.config.auth.PrincipalUsersService;
 import com.example.jwt.config.jwt.JwtAuthenticationFilter;
 import com.example.jwt.filter.MyFilter3;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-	
+
+//	@Autowired
+//	private UserRepository userRepository;
+
 	@Autowired
-	private JwtAuthenticationFilter authenticationFilter;
-	
+	private CorsConfig corsConfig;
+
 	@Bean
- 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class);
-		http.csrf().disable();
-		http.cors();
-		http.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		http.formLogin().disable().httpBasic().disable()
- 			.addFilter(authenticationFilter);
- 		
- 		http.authorizeRequests()
- 		.antMatchers("/api/v1/user/**").hasAnyRole("USER", "MANAGER", "ADMIN")
- 		.antMatchers("/api/v1/manager/**").hasAnyRole("MANAGER", "ADMIN")
- 		.antMatchers("/api/v1/admin/**").hasAnyRole("ADMIN")
- 		.anyRequest().permitAll();
- 		
- 		return http.build();
- 	}
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		return http
+				.csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.formLogin().disable()
+				.httpBasic().disable()
+				.apply(new MyCustomDsl()) // 커스텀 필터 등록
+				.and()
+				.authorizeRequests(authroize -> 
+					authroize
+						.antMatchers("/api/v1/user/**").hasAnyRole("USER", "MANAGER", "ADMIN")
+						.antMatchers("/api/v1/manager/**").hasAnyRole("MANAGER", "ADMIN")
+						.antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+						.anyRequest().permitAll())
+				.build();
+	}
+
+	public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
+		@Override
+		public void configure(HttpSecurity http) throws Exception {
+			AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+			http
+					.addFilter(corsConfig.corsFilter())
+					.addFilter(new JwtAuthenticationFilter(authenticationManager));
+//					.addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
+		}
+	}
+
 }

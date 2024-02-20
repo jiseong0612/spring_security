@@ -26,13 +26,5 @@ public class FilterConfig {
 		return bean;
 		
 	}
-//	@Bean
-//	public FilterRegistrationBean<MyFilter3> myFilter3(){
-//		FilterRegistrationBean<MyFilter3> bean = new FilterRegistrationBean<>(new MyFilter3());
-//		bean.addUrlPatterns("/*");
-//		bean.setOrder(0); //낮은 번호가 필터중에 가장 먼저 실행됨
-//		
-//		return bean;
-//		
-//	}
+
 }

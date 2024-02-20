@@ -22,6 +22,7 @@ public class MyFilter3 implements Filter{
 		System.out.println("필터3");
 		
 		if(req.getMethod().equals("POST")) {
+			System.out.println("POST 요청됨!");
 			String headerAuth = req.getHeader("Authorization");
 			System.out.println(headerAuth);
 			
