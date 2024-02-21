@@ -71,6 +71,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		response.addHeader("Authorization", "Bearer "+jwtToken);
 		
+		//만약 프론트에 로그인 성공 후 값을 주고싶다면..
+		response.getWriter().write(String.valueOf(jwtToken));
+		
+		
 		System.out.println("토큰 발급 완료");
 		
 //		String jwtToken = JWT.create()
