@@ -9,9 +9,9 @@ server:
  
 spring:
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/security
-    username: root
-    password: 1234
+    url: jdbc:mariadb://192.168.0.32:3306/security
+    username: ggmacc
+    password: host1234
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:

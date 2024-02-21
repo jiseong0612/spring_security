@@ -4,7 +4,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jwt.model.User;
@@ -18,6 +17,20 @@ import lombok.RequiredArgsConstructor;
 public class RestApiController {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@GetMapping("/api/v1/user")
+	public String user() {
+		return "user";
+	}
+	
+	@GetMapping("/api/v1/manager")
+	public String manager() {
+		return "manager";
+	}
+	@GetMapping("/api/v1/admin")
+	public String admin() {
+		return "admin";
+	}
 	
 	@GetMapping("/home")
 	public String home() {
